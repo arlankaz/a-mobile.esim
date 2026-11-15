@@ -3,12 +3,15 @@ import type { Country } from './types';
 export const countriesData: Country[] = [
   { id: 'TR', name: 'Турция', flag: '🇹🇷', region: 'EU', startUsd: 1.14, popular: true },
   { id: 'EG', name: 'Египет', flag: '🇪🇬', region: 'ME', startUsd: 1.78, popular: true },
-  { id: 'AE', name: 'ОАЭ', flag: '🇦🇪', region: 'ME', startUsd: 2.16, popular: true },
-  { id: 'GE', name: 'Грузия', flag: '🇬🇪', region: 'EU', startUsd: 1.5, popular: true },
   { id: 'TH', name: 'Таиланд', flag: '🇹🇭', region: 'ASIA', startUsd: 1.14, popular: true },
   { id: 'US', name: 'США', flag: '🇺🇸', region: 'AMERICA', startUsd: 1.4, popular: false },
   { id: 'VN', name: 'Вьетнам', flag: '🇻🇳', region: 'ASIA', startUsd: 1.65, popular: true },
   { id: 'CN', name: 'Китай', flag: '🇨🇳', region: 'ASIA', startUsd: 1.8, popular: true },
+  { id: 'AE', name: 'ОАЭ', flag: '🇦🇪', region: 'ME', startUsd: 2.16, popular: true },
+  { id: 'GE', name: 'Грузия', flag: '🇬🇪', region: 'EU', startUsd: 1.5, popular: true },
+  { id: 'EU33', name: 'Европа — 33 страны', flag: '🇪🇺', region: 'EU', startUsd: 6.98, popular: true },
+  { id: 'EU34', name: 'Европа + Турция — 34 страны', flag: '🇪🇺', region: 'EU', startUsd: 9.98, popular: true },
+
 
   { id: 'ES', name: 'Испания', flag: '🇪🇸', region: 'EU', startUsd: 1.6, popular: false },
   { id: 'FR', name: 'Франция', flag: '🇫🇷', region: 'EU', startUsd: 1.6, popular: false },
