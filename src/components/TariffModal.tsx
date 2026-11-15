@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { X, ArrowRight, Info } from 'lucide-react';
 
 import { getEsimPlans } from '../data/eSIMCatalog';
+import RegionalCoverage from './RegionalCoverage';
 import { formatPrice, pluralDays } from '../utils';
 
 import type {
@@ -226,6 +227,15 @@ export default function TariffModal({
             </div>
           )}
         </div>
+
+        
+{/* Список стран для региональных eSIM */}
+<RegionalCoverage
+  key={country.id}
+  regionId={country.id}
+  lang={lang}
+/>
+
 
         {/* Информация для покупателя */}
         <div className="flex items-start gap-2.5 rounded-2xl border border-gray-800/60 bg-gray-900/60 p-3 text-xs text-gray-400">
