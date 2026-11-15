@@ -19,9 +19,6 @@ export default function Header({
 }: HeaderProps) {
   const [isLangOpen, setIsLangOpen] = useState(false);
 
-  const currentLangObj =
-    LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0];
-
   return (
     <header className="sticky top-0 z-40 flex items-center justify-between gap-2 border-b border-slate-800 bg-[#0b0f19]/90 px-3 py-3 backdrop-blur-md">
 
@@ -44,18 +41,17 @@ export default function Header({
       {/* Язык и валюта */}
       <div className="flex shrink-0 items-center gap-1.5">
 
-        {/* Выбор языка */}
+        {/* Выбор языка без флагов */}
         <div className="relative">
           <button
             type="button"
             onClick={() => setIsLangOpen(!isLangOpen)}
             aria-label="Select language"
             aria-expanded={isLangOpen}
-            className="flex items-center gap-1 rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"
+            className="flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 px-2.5 py-1.5 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"
           >
-            <span>{currentLangObj.flag}</span>
             <span className="uppercase">
-              {currentLangObj.code}
+              {currentLang}
             </span>
           </button>
 
@@ -77,13 +73,12 @@ export default function Header({
                       onLanguageChange(item.code);
                       setIsLangOpen(false);
                     }}
-                    className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs transition hover:bg-slate-700 ${
+                    className={`flex w-full items-center px-3 py-2 text-left text-xs transition hover:bg-slate-700 ${
                       currentLang === item.code
                         ? 'bg-cyan-500/20 font-bold text-cyan-400'
                         : 'text-slate-200'
                     }`}
                   >
-                    <span>{item.flag}</span>
                     <span>{item.label}</span>
                   </button>
                 ))}
