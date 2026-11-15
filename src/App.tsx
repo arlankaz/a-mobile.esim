@@ -92,7 +92,14 @@ const demoTexts: Record<Language, {
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('home');
-  const [currency, setCurrency] = useState<Currency>('KZT');
+  
+const [currency, setCurrency] = useState<Currency>(() => {
+  const initialLang = getInitialLanguage();
+
+  return initialLang === 'ru' || initialLang === 'kk'
+    ? 'KZT'
+    : 'USD';
+});
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('popular');
   const [lang, setLang] = useState<Language>(() => getInitialLanguage());
@@ -105,14 +112,25 @@ export default function App() {
   const t = (key: string): string =>
     translations[lang]?.[key] ?? translations.ru[key] ?? key;
 
-  const changeLanguage = (nextLanguage: Language) => {
-    setLang(nextLanguage);
-    try {
-      localStorage.setItem('app_lang', nextLanguage);
-    } catch {
-      // Language selection still works for the current session.
-    }
-  };
+  
+const changeLanguage = (nextLanguage: Language) => {
+  setLang(nextLanguage);
+
+  // Автоматически выбираем валюту по языку
+  const nextCurrency: Currency =
+    nextLanguage === 'ru' || nextLanguage === 'kk'
+      ? 'KZT'
+      : 'USD';
+
+  setCurrency(nextCurrency);
+
+  try {
+    localStorage.setItem('app_lang', nextLanguage);
+  } catch {
+    // Language selection still works for the current session.
+  }
+};
+
 
   const showToast = useCallback((message: string, variant: ToastVariant = 'success') => {
     setToast({ message, variant });
