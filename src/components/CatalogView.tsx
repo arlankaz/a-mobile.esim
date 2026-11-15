@@ -128,9 +128,24 @@ export default function CatalogView({
               className="group flex min-h-[138px] min-w-0 flex-col rounded-[20px] border border-slate-700/70 bg-gradient-to-b from-slate-800/95 to-slate-900/90 p-3.5 text-left shadow-md shadow-black/10 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-950/20 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               {/* Флаг — без стрелки */}
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/5 text-[27px] leading-none">
-                {country.flag}
-              </div>
+              
+<div
+  className={`flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-2xl border border-white/5 bg-white/5 leading-none ${
+    country.id === 'EU34'
+      ? 'w-[76px] gap-1 px-2 text-[25px]'
+      : 'w-11 text-[27px]'
+  }`}
+>
+  {country.id === 'EU34' ? (
+    <>
+      <span>🇪🇺</span>
+      <span>🇹🇷</span>
+    </>
+  ) : (
+    country.flag
+  )}
+</div>
+
 
               {/* Название и цена */}
               <div className="mt-3 min-w-0 space-y-1.5">
