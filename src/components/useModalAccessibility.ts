@@ -6,82 +6,114 @@ export function useModalAccessibility(
   onClose: () => void
 ) {
   const dialogRef = useRef<HTMLDivElement>(null);
-  const onCloseRef = useRef(onClose);
-
-  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (!open) return;
 
-    const previousFocus =
-      document.activeElement as HTMLElement | null;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
-    const previousOverflow = document.body.style.overflow;
+    // Запоминаем элемент, с которого открыли окно.
+    const previousFocus =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
+    // Сохраняем текущие стили прокрутки.
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow =
+      document.documentElement.style.overflow;
 
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 
-    const dialog = dialogRef.current;
+    const focusableSelector = [
+      'button:not([disabled])',
+      'a[href]',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ');
 
-    const focusableSelector =
-      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    function getFocusableElements(): HTMLElement[] {
+      if (!dialog) return [];
 
-    const firstFocusable =
-      dialog?.querySelector<HTMLElement>(focusableSelector);
-
-    (firstFocusable ?? dialog)?.focus();
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        onCloseRef.current();
-        return;
-      }
-
-      if (event.key !== 'Tab' || !dialog) return;
-
-      const elements = Array.from(
+      return Array.from(
         dialog.querySelectorAll<HTMLElement>(focusableSelector)
-      ).filter((el) => el.getClientRects().length > 0);
+      ).filter(
+        (element) =>
+          element.getClientRects().length > 0 &&
+          element.getAttribute('aria-hidden') !== 'true'
+      );
+    }
+
+    // Переводим фокус внутрь модального окна.
+    const initialFocus = getFocusableElements()[0];
+
+    if (initialFocus) {
+      initialFocus.focus();
+    } else {
+      dialog.focus();
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      // Escape уже обрабатывается в App.tsx.
+      if (event.key !== 'Tab') return;
+
+      const elements = getFocusableElements();
 
       if (elements.length === 0) {
         event.preventDefault();
-        dialog.focus();
+        dialog?.focus();
         return;
       }
 
       const first = elements[0];
       const last = elements[elements.length - 1];
 
-      if (
-        event.shiftKey &&
-        (
-          document.activeElement === first ||
-          !dialog.contains(document.activeElement)
-        )
-      ) {
-        event.preventDefault();
-        last.focus();
-      } else if (
-        !event.shiftKey &&
-        (
-          document.activeElement === last ||
-          !dialog.contains(document.activeElement)
-        )
-      ) {
-        event.preventDefault();
-        first.focus();
+      const active = document.activeElement;
+
+      if (event.shiftKey) {
+        if (
+          active === first ||
+          !dialog?.contains(active)
+        ) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (
+          active === last ||
+          !dialog?.contains(active)
+        ) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     }
 
-    window.addEventListener('keydown', onKeyDown, true);
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', onKeyDown, true);
+      document.removeEventListener('keydown', handleKeyDown);
 
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow =
+        previousHtmlOverflow;
 
-      previousFocus?.focus();
+      // Не возвращаем фокус на карточку каталога,
+      // если уже открывается другое модальное окно.
+      const anotherDialog = Array.from(
+        document.querySelectorAll('[role="dialog"]')
+      ).some((element) => element !== dialog);
+
+      if (
+        !anotherDialog &&
+        previousFocus?.isConnected
+      ) {
+        previousFocus.focus();
+      }
     };
   }, [open]);
 
