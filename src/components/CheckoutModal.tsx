@@ -14,6 +14,9 @@ import {
 
 import { formatPrice } from '../utils';
 
+import { useModalAccessibility } from './useModalAccessibility';
+
+
 import type {
   Country,
   Currency,
@@ -250,6 +253,7 @@ export default function CheckoutModal({
 }: CheckoutModalProps) {
   const [email, setEmail] = useState('');
   const [terms, setTerms] = useState(false);
+  const dialogRef = useModalAccessibility(open, onClose);
 
   useEffect(() => {
     if (open) {
@@ -305,13 +309,17 @@ export default function CheckoutModal({
     onPaySuccess();
   };
 
-  return (
-    <div
-      className="fixed inset-0 z-50 flex flex-col justify-end bg-black/80 backdrop-blur-md"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="checkout-title"
-    >
+  
+return (
+  <div
+    ref={dialogRef}
+    tabIndex={-1}
+    className="fixed inset-0 z-50 flex flex-col justify-end bg-black/80 backdrop-blur-md"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="checkout-title"
+  >
+
       <div className="drawer-slide-up mx-auto max-h-[92vh] w-full max-w-md space-y-4 overflow-y-auto rounded-t-3xl border-t border-gray-800 bg-gray-950 p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
 
         {/* Заголовок */}
