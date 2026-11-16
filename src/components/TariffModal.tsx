@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from 'react';
 import { X, ArrowRight, Info } from 'lucide-react';
-
 import { getEsimPlans } from '../data/eSIMCatalog';
 import RegionalCoverage from './RegionalCoverage';
+import { useModalAccessibility } from './useModalAccessibility';
 import { formatPrice, pluralDays } from '../utils';
 
 import type {
@@ -105,6 +105,8 @@ export default function TariffModal({
 }: TariffModalProps) {
   const [selectedId, setSelectedId] = useState('');
 
+  const dialogRef = useModalAccessibility(open, onClose);
+
   const plans = country
     ? getEsimPlans(country.id)
     : [];
@@ -151,14 +153,17 @@ export default function TariffModal({
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex flex-col justify-end bg-black/80 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-label={countryName}
     >
-      <div
-        className="drawer-slide-up mx-auto max-h-[92vh] w-full max-w-md space-y-4 overflow-y-auto rounded-t-3xl border-t border-gray-800 bg-gray-950 p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]"
-      >
+      
+<div className="drawer-slide-up mx-auto flex max-h-[92dvh] w-full max-w-md flex-col overflow-hidden rounded-t-3xl border-t border-gray-800 bg-gray-950">
+  <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain p-5">
+
         {/* Заголовок */}
         <div className="flex items-center justify-between border-b border-gray-800/80 pb-3">
           <div className="flex items-center gap-3">
@@ -246,6 +251,13 @@ export default function TariffModal({
           </p>
         </div>
 
+
+  </div>
+
+  {/* Закреплённая нижняя часть */}
+  <div className="shrink-0 border-t border-gray-800 bg-gray-950 px-5 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
+
+    
         {/* Оформление заказа */}
         <button
           type="button"
@@ -255,7 +267,9 @@ export default function TariffModal({
         >
           <span>{text.continue}</span>
           <ArrowRight className="h-5 w-5" />
+       
         </button>
+        </div>
       </div>
     </div>
   );
