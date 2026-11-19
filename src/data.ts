@@ -11,6 +11,46 @@ export const countriesData: Country[] = [
   { id: 'GE', name: 'Грузия', flag: '🇬🇪', region: 'EU', startUsd: 1.5, popular: true },
   { id: 'EU33', name: 'Европа — 33 страны', flag: '🇪🇺', region: 'EU', startUsd: 6.98, popular: true },
   { id: 'EU34', name: 'Европа + Турция — 34 страны', flag: '🇪🇺 🇹🇷', region: 'EU', startUsd: 9.98, popular: true },
+  
+  // ==========================================
+  // РЕГИОНАЛЬНЫЕ eSIM — A-MOBILE
+  // ==========================================
+  // REG_ — префикс региональных направлений.
+  // startUsd пока не используется для расчёта цен.
+  // Реальные цены подключим через eSIMCatalog.ts.
+
+  // Азия
+  { id: 'REG_ASIA14', name: 'Азия — 14 направлений', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_ASIA12', name: 'Азия — 12 направлений', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_ASIA20', name: 'Азия — 20 направлений', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_CENTRAL_ASIA', name: 'Центральная Азия', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_SE_ASIA', name: 'Юго-Восточная Азия', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_TH_MY_SG', name: 'Таиланд + Малайзия + Сингапур', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_CN_HK_MO', name: 'Китай + Гонконг + Макао', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_CN_JP_KR', name: 'Китай + Япония + Южная Корея', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_JP_KR', name: 'Япония + Южная Корея', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_AU_NZ', name: 'Австралия + Новая Зеландия', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+
+  // Европа
+  { id: 'REG_BALKANS', name: 'Балканы', flag: '🌍', region: 'EU', startUsd: 0, popular: false },
+
+  // Ближний Восток
+  { id: 'REG_MIDDLE_EAST', name: 'Ближний Восток', flag: '🌍', region: 'ME', startUsd: 0, popular: false },
+  { id: 'REG_GULF', name: 'Персидский залив', flag: '🌍', region: 'ME', startUsd: 0, popular: false },
+
+  // Америка
+  { id: 'REG_NORTH_AMERICA', name: 'Северная Америка', flag: '🌎', region: 'AMERICA', startUsd: 0, popular: false },
+  { id: 'REG_US_CA', name: 'США + Канада', flag: '🌎', region: 'AMERICA', startUsd: 0, popular: false },
+  { id: 'REG_SOUTH_AMERICA', name: 'Южная Америка', flag: '🌎', region: 'AMERICA', startUsd: 0, popular: false },
+
+  // Африка
+  { id: 'REG_AFRICA', name: 'Африка', flag: '🌍', region: 'AFRICA', startUsd: 0, popular: false },
+
+  // Другие регионы
+  { id: 'REG_OCEANIA', name: 'Океания', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_SOUTH_ASIA', name: 'Южная Азия', flag: '🌏', region: 'ASIA', startUsd: 0, popular: false },
+  { id: 'REG_GLOBAL', name: 'Глобальная eSIM', flag: '🌐', region: 'EU', startUsd: 0, popular: false },
+
 
 
   { id: 'ES', name: 'Испания', flag: '🇪🇸', region: 'EU', startUsd: 1.6, popular: false },
