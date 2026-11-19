@@ -178,11 +178,15 @@ export default function PlanTechnicalDetails({
                 const parts = row.split(' — ');
                 const originalName = parts[0] ?? '';
                 const operators = parts.slice(1).join(' — ');
-                const code = regionCodes[index];
+                const isIsoCode = /^[A-Z]{2}$/.test(originalName);
+const code = isIsoCode
+  ? originalName
+  : regionCodes[index];
 
-                const countryName = code
-                  ? getRegionName(code, lang, originalName)
-                  : originalName;
+const countryName = code
+  ? getRegionName(code, lang, originalName)
+  : originalName;
+
 
                 return (
                   <div
