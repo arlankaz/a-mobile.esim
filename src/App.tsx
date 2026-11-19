@@ -28,8 +28,8 @@ type OrderSelection = {
 
 // Региональные eSIM, включая будущие пакеты.
 // Для новых направлений используем ID с префиксом REG_.
+
 const isRegionalEsim = (country: Country): boolean =>
-  country.id === 'EU33' ||
   country.id === 'EU34' ||
   country.id.startsWith('REG_');
 
@@ -177,14 +177,35 @@ const translatedName =
 
     // Когда поиск пустой, применяем выбранную категорию.
     
+
+// Когда поиск пустой, применяем выбранную категорию.
+
+// Региональные тарифы:
+// Европа + Турция и все REG_ направления.
 if (category === 'regional') {
   return isRegionalEsim(country);
 }
-return (
-      category === 'global' ||
-      (category === 'popular'
-        ? country.popular
-        : country.region === region)
+
+// Популярные:
+// популярные страны + Европа + Турция.
+if (category === 'popular') {
+  return country.popular;
+}
+
+// Региональные пакеты не должны попадать
+// в обычные географические категории.
+if (isRegionalEsim(country)) {
+  return false;
+}
+
+// Весь мир — все отдельные направления.
+if (category === 'global') {
+  return true;
+}
+
+// Европа, Азия, Америка и другие категории.
+return country.region === region;
+
     );
   });
 }, [search, category, lang]);
