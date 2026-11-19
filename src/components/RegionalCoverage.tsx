@@ -2,8 +2,12 @@
 import { useState } from 'react';
 import { ChevronDown, Globe2, Check } from 'lucide-react';
 import type { Language } from './translations';
+import { REGIONAL_COVERAGE } from '../data/regionalCoverageData';
+
+
 
 const COVERAGE: Record<string, string[]> = {
+  ...REGIONAL_COVERAGE,
   EU33: [
     'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE',
     'FI', 'FR', 'DE', 'GI', 'GR', 'HU', 'IS', 'IE',
@@ -85,6 +89,8 @@ const LANGUAGE_LOCALES: Record<Language, string> = {
 };
 
 const FALLBACK_NAMES: Record<string, string> = {
+  XK: 'Косово',
+  TL: 'Восточный Тимор',
   AT: 'Австрия',
   BE: 'Бельгия',
   BG: 'Болгария',
