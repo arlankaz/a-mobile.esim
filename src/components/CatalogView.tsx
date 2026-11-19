@@ -132,12 +132,11 @@ export default function CatalogView({
               {/* Флаг — без стрелки */}
               
 
+
 {/* Иконка направления */}
 {(() => {
   const coverage = REGIONAL_COVERAGE[country.id];
 
-  // Показываем флаги только для регионов
-  // с количеством стран от 2 до 4.
   const showFlags =
     coverage &&
     coverage.length >= 2 &&
@@ -145,31 +144,32 @@ export default function CatalogView({
 
   if (showFlags) {
     return (
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/5">
-        <div className="grid grid-cols-2 place-items-center gap-0.5 text-[17px] leading-none">
-          {coverage.map((code) => {
-            const flag = String.fromCodePoint(
-              ...code
-                .toUpperCase()
-                .split('')
-                .map(
-                  (letter) =>
-                    127397 + letter.charCodeAt(0)
-                )
-            );
+      <div className="flex max-w-full min-w-0 items-center gap-[3px]">
+        {coverage.map((code) => {
+          const flag = String.fromCodePoint(
+            ...code
+              .toUpperCase()
+              .split('')
+              .map(
+                (letter) =>
+                  127397 + letter.charCodeAt(0)
+              )
+          );
 
-            return (
-              <span key={code}>
-                {flag}
-              </span>
-            );
-          })}
-        </div>
+          return (
+            <div
+              key={code}
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-[19px] leading-none"
+            >
+              {flag}
+            </div>
+          );
+        })}
       </div>
     );
   }
 
-  // Все остальные направления без изменений.
+  // Для остальных регионов оставляем прежние значки
   return (
     <div
       className={`flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-2xl border border-white/5 bg-white/5 leading-none ${
@@ -189,6 +189,7 @@ export default function CatalogView({
     </div>
   );
 })()}
+
 
 
 
