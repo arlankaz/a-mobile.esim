@@ -35,6 +35,40 @@ const isRegionalEsim = (country: Country): boolean =>
   country.id.startsWith('REG_');
 
 
+/**
+ * ПОРЯДОК РЕГИОНАЛЬНЫХ ТАРИФОВ
+ *
+ * Первый ID — первая карточка.
+ * Меняй строки местами, чтобы изменять порядок.
+ * На другие категории не влияет.
+ */
+const REGIONAL_ORDER: string[] = [
+  'EU33',
+  'EU34',
+  'REG_CN_HK_MO',
+  'REG_CN_JP_KR',
+  'REG_JP_KR',
+  'REG_TH_MY_SG',
+  'REG_CENTRAL_ASIA',
+  'REG_US_CA',
+  'REG_NORTH_AMERICA',
+  'REG_ASIA14',
+  'REG_SE_ASIA',
+  'REG_ASIA12',
+  'REG_ASIA20',
+  'REG_MIDDLE_EAST',
+  'REG_GULF',
+  'REG_BALKANS',
+  'REG_AU_NZ',
+  'REG_SOUTH_ASIA',
+  'REG_SOUTH_AMERICA',
+  'REG_AFRICA',
+  'REG_OCEANIA',
+  'REG_GLOBAL',
+  
+];
+
+
 const REGION_BY_CATEGORY: Record<string, string> = {
   europe: 'EU',
   asia: 'ASIA',
@@ -156,7 +190,10 @@ const visibleCountries = useMemo(() => {
   const query = search.trim().toLocaleLowerCase();
   const region = REGION_BY_CATEGORY[category];
 
-  return countriesData.filter((country) => {
+  
+return countriesData
+  .filter((country) => {
+
     if (!hasEsimPlans(country.id)) return false;
     
     
@@ -212,9 +249,28 @@ if (category === 'global') {
 }
 
 // Европа, Азия, Америка и другие категории.
-return country.region === region;
+    return country.region === region;
+  })
+  .sort((a, b) => {
+    // Сортируем только региональную категорию
+    // при пустой поисковой строке.
+    if (category !== 'regional' || query) {
+      return 0;
+    }
+
+    const aIndex = REGIONAL_ORDER.indexOf(a.id);
+    const bIndex = REGIONAL_ORDER.indexOf(b.id);
+
+    const aPriority =
+      aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex;
+
+    const bPriority =
+      bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex;
+
+    return aPriority - bPriority;
   });
 }, [search, category, lang]);
+
 
   const closeCheckout = useCallback(() => {
     if (checkout) {
