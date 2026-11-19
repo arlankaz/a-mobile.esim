@@ -243,7 +243,7 @@ export const translations: Record<Language, Record<string, string>> = {
   kk: {
     searchPlaceholder: 'Қайда ұшасыз? ✈️ (мысалы: Түркия)',
     popular: '🔥 Танымал',
-    regional: '🌍 Аймақтық тарифтер'
+    regional: '🌍 Аймақтық тарифтер',
     europe: 'Еуропа',  
     eu33: 'Еуропа — 33 ел',
     eu34: 'Еуропа + Түркия — 34 ел',
