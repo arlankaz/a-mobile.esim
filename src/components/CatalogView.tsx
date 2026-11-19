@@ -2,6 +2,7 @@
 import { Search, Smartphone, ChevronRight } from 'lucide-react';
 import type { Country, Currency } from '../types';
 import { getLowestPriceKzt } from '../data/eSIMCatalog';
+import { REGIONAL_COVERAGE } from '../data/regionalCoverageData';
 import { formatPrice } from '../utils';
 
 interface CatalogViewProps {
@@ -130,22 +131,65 @@ export default function CatalogView({
             >
               {/* Флаг — без стрелки */}
               
-<div
-  className={`flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-2xl border border-white/5 bg-white/5 leading-none ${
-    country.id === 'EU34'
-      ? 'w-[76px] gap-1 px-2 text-[25px]'
-      : 'w-11 text-[27px]'
-  }`}
->
-  {country.id === 'EU34' ? (
-    <>
-      <span>🇪🇺</span>
-      <span>🇹🇷</span>
-    </>
-  ) : (
-    country.flag
-  )}
-</div>
+
+{/* Иконка направления */}
+{(() => {
+  const coverage = REGIONAL_COVERAGE[country.id];
+
+  // Показываем флаги только для регионов
+  // с количеством стран от 2 до 4.
+  const showFlags =
+    coverage &&
+    coverage.length >= 2 &&
+    coverage.length <= 4;
+
+  if (showFlags) {
+    return (
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/5">
+        <div className="grid grid-cols-2 place-items-center gap-0.5 text-[17px] leading-none">
+          {coverage.map((code) => {
+            const flag = String.fromCodePoint(
+              ...code
+                .toUpperCase()
+                .split('')
+                .map(
+                  (letter) =>
+                    127397 + letter.charCodeAt(0)
+                )
+            );
+
+            return (
+              <span key={code}>
+                {flag}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Все остальные направления без изменений.
+  return (
+    <div
+      className={`flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-2xl border border-white/5 bg-white/5 leading-none ${
+        country.id === 'EU34'
+          ? 'w-[76px] gap-1 px-2 text-[25px]'
+          : 'w-11 text-[27px]'
+      }`}
+    >
+      {country.id === 'EU34' ? (
+        <>
+          <span>🇪🇺</span>
+          <span>🇹🇷</span>
+        </>
+      ) : (
+        country.flag
+      )}
+    </div>
+  );
+})()}
+
 
 
               {/* Название и цена */}
