@@ -24,6 +24,15 @@ type OrderSelection = {
   tariff: SelectedTariff;
 };
 
+
+// Региональные eSIM, включая будущие пакеты.
+// Для новых направлений используем ID с префиксом REG_.
+const isRegionalEsim = (country: Country): boolean =>
+  country.id === 'EU33' ||
+  country.id === 'EU34' ||
+  country.id.startsWith('REG_');
+
+
 const REGION_BY_CATEGORY: Record<string, string> = {
   europe: 'EU',
   asia: 'ASIA',
@@ -160,7 +169,11 @@ const visibleCountries = useMemo(() => {
     }
 
     // Когда поиск пустой, применяем выбранную категорию.
-    return (
+    
+if (category === 'regional') {
+  return isRegionalEsim(country);
+}
+return (
       category === 'global' ||
       (category === 'popular'
         ? country.popular
