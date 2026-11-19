@@ -32,13 +32,13 @@ const REGIONAL_COVERAGE_CODES: Record<string, string> = {
     'TH,LA,VN,PH,TL,ID,MY,KH',
 
   REG_TH_MY_SG:
-    'TH,SG,MY',
+    'TH,MY,SG',
 
   REG_CN_HK_MO:
-    'MO,HK,CN',
+    'CN,HK,MO',
 
   REG_CN_JP_KR:
-    'JP,KR,CN',
+    'CN,JP,KR',
 
   REG_JP_KR:
     'JP,KR',
