@@ -181,17 +181,16 @@ const translatedName =
 
 // Когда поиск пустой, применяем выбранную категорию.
 
+    
+if (category === 'regional') {
+  return isRegionalEsim(country);
+}
+
 
 // Европа — 33 страны также доступна
 // в географической категории «Европа».
 if (country.id === 'EU33' && category === 'europe') {
   return true;
-}
-
-// Остальные региональные пакеты не смешиваем
-// с географическими категориями.
-if (isRegionalEsim(country)) {
-  return false;
 }
 
 
