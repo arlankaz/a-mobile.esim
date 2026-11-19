@@ -205,8 +205,6 @@ if (category === 'global') {
 
 // Европа, Азия, Америка и другие категории.
 return country.region === region;
-
-    );
   });
 }, [search, category, lang]);
 
