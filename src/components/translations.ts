@@ -19,6 +19,7 @@ export const translations: Record<Language, Record<string, string>> = {
   ru: {
     searchPlaceholder: 'Куда летите? ✈️ (например: Турция)',
     popular: '🔥 Популярные',
+    regional: '🌍 Региональные тарифы',
     europe: 'Европа',
     eu33: 'Европа — 33 страны',
     eu34: 'Европа + Турция — 34 страны',
@@ -130,6 +131,7 @@ export const translations: Record<Language, Record<string, string>> = {
   en: {
     searchPlaceholder: 'Where are you flying? ✈️ (e.g. Turkey)',
     popular: '🔥 Popular',
+    regional: '🌍 Regional plans',
     europe: 'Europe',
     eu33: 'Europe — 33 countries',
     eu34: 'Europe + Turkey — 34 countries',
@@ -241,6 +243,7 @@ export const translations: Record<Language, Record<string, string>> = {
   kk: {
     searchPlaceholder: 'Қайда ұшасыз? ✈️ (мысалы: Түркия)',
     popular: '🔥 Танымал',
+    regional: '🌍 Аймақтық тарифтер'
     europe: 'Еуропа',  
     eu33: 'Еуропа — 33 ел',
     eu34: 'Еуропа + Түркия — 34 ел',
@@ -351,6 +354,7 @@ export const translations: Record<Language, Record<string, string>> = {
   uz: {
     searchPlaceholder: 'Qayerga uchasiz? ✈️ (masalan: Turkiya)',
     popular: '🔥 Ommabop',
+    regional: '🌍 Mintaqaviy tariflar',
     europe: 'Yevropa',
     eu33: 'Yevropa — 33 davlat',
     eu34: 'Yevropa + Turkiya — 34 davlat',
@@ -461,6 +465,7 @@ export const translations: Record<Language, Record<string, string>> = {
   uk: {
     searchPlaceholder: 'Куди летите? ✈️ (наприклад: Туреччина)',
     popular: '🔥 Популярні',
+    regional: '🌍 Регіональні тарифи',
     europe: 'Європа',    
     eu33: 'Європа — 33 країни',
     eu34: 'Європа + Туреччина — 34 країни',
@@ -571,6 +576,7 @@ export const translations: Record<Language, Record<string, string>> = {
   de: {
     searchPlaceholder: 'Wohin fliegen Sie? ✈️ (z. B. Türkei)',
     popular: '🔥 Beliebt',
+    regional: '🌍 Regionale Tarife',
     europe: 'Europa',
     eu33: 'Europa — 33 Länder',
     eu34: 'Europa + Türkei — 34 Länder',
