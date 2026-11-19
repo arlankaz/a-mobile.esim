@@ -8,6 +8,7 @@ import CheckoutModal from './components/CheckoutModal';
 import CompatModal from './components/CompatModal';
 import Toast from './components/Toast';
 import { countriesData } from './data';
+import { regionalTranslations } from './components/regionalTranslations';
 import { hasEsimPlans } from './data/eSIMCatalog';
 import type { Country, Currency, SelectedTariff } from './types';
 import {
@@ -118,8 +119,12 @@ const [currency, setCurrency] = useState<Currency>(() => {
   const [compatOpen, setCompatOpen] = useState(false);
   const [toast, setToast] = useState<{ message: string; variant: ToastVariant } | null>(null);
 
-  const t = (key: string): string =>
-    translations[lang]?.[key] ?? translations.ru[key] ?? key;
+  
+const t = (key: string): string =>
+  regionalTranslations[lang]?.[key] ??
+  translations[lang]?.[key] ??
+  translations.ru[key] ??
+  key;
 
   
 const changeLanguage = (nextLanguage: Language) => {
@@ -153,10 +158,12 @@ const visibleCountries = useMemo(() => {
   return countriesData.filter((country) => {
     if (!hasEsimPlans(country.id)) return false;
     
-    const translatedName =
-      translations[lang]?.[country.id.toLowerCase()] ??
-      translations[lang]?.[country.name.toLowerCase()] ??
-      country.name;
+    
+const translatedName =
+  regionalTranslations[lang]?.[country.id.toLowerCase()] ??
+  translations[lang]?.[country.id.toLowerCase()] ??
+  translations[lang]?.[country.name.toLowerCase()] ??
+  country.name;
 
     // Когда пользователь вводит текст,
     // ищем по всем странам без ограничения региона.
