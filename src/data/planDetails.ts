@@ -7,6 +7,9 @@
  * Это снимок данных поставщика, а не live API.
  */
 
+import { getRegionalOperators } from './regionalOperatorData';
+
+
 export interface PlanDetails {
   operators: string;
   activation: 'network';
@@ -192,7 +195,11 @@ export function getPlanDetails(
 ): PlanDetails | null {
   const code = countryId === 'ME_' ? 'ME' : countryId;
 
-  const regionalOperators = REGIONAL_OPERATORS[code];
+  
+const regionalOperators =
+  REGIONAL_OPERATORS[code] ??
+  getRegionalOperators(code);
+
 
   if (regionalOperators) {
     return {
