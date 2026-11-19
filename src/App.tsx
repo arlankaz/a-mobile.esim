@@ -30,6 +30,7 @@ type OrderSelection = {
 // Для новых направлений используем ID с префиксом REG_.
 
 const isRegionalEsim = (country: Country): boolean =>
+  country.id === 'EU33' ||
   country.id === 'EU34' ||
   country.id.startsWith('REG_');
 
@@ -180,11 +181,19 @@ const translatedName =
 
 // Когда поиск пустой, применяем выбранную категорию.
 
-// Региональные тарифы:
-// Европа + Турция и все REG_ направления.
-if (category === 'regional') {
-  return isRegionalEsim(country);
+
+// Европа — 33 страны также доступна
+// в географической категории «Европа».
+if (country.id === 'EU33' && category === 'europe') {
+  return true;
 }
+
+// Остальные региональные пакеты не смешиваем
+// с географическими категориями.
+if (isRegionalEsim(country)) {
+  return false;
+}
+
 
 // Популярные:
 // популярные страны + Европа + Турция.
