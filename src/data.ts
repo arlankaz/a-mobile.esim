@@ -9,8 +9,9 @@ export const countriesData: Country[] = [
   { id: 'CN', name: 'Китай', flag: '🇨🇳', region: 'ASIA', startUsd: 1.8, popular: true },
   { id: 'AE', name: 'ОАЭ', flag: '🇦🇪', region: 'ME', startUsd: 2.16, popular: true },
   { id: 'GE', name: 'Грузия', flag: '🇬🇪', region: 'EU', startUsd: 1.5, popular: true },
-  { id: 'EU33', name: 'Европа — 33 страны', flag: '🇪🇺', region: 'EU', startUsd: 6.98, popular: true },
+  { id: 'EU33', name: 'Европа — 33 страны', flag: '🇪🇺', region: 'EU', startUsd: 6.98, popular: false },
   { id: 'EU34', name: 'Европа + Турция — 34 страны', flag: '🇪🇺 🇹🇷', region: 'EU', startUsd: 9.98, popular: true },
+
   
   // ==========================================
   // РЕГИОНАЛЬНЫЕ eSIM — A-MOBILE
