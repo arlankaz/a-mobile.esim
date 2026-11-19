@@ -18,6 +18,7 @@ interface CatalogViewProps {
 
 const CATEGORIES = [
   'popular',
+  'regional',
   'europe',
   'asia',
   'middleEast',
