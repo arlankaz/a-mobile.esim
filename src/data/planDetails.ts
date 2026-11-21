@@ -91,7 +91,7 @@ const COUNTRY_OPERATORS: Record<string, string> = {
   TH: 'TrueMove H, DTAC',
   TJ: 'MegaFon, ZET',
   TN: 'OOREDOO TN',
-  TR: 'Vodafone',
+  TR: 'Turkcell, Vodafone, Türk Telekom',
   US: 'Verizon, AT&T',
   UZ: 'Beeline',
   VN: 'Viettel Mobile, Vinaphone, MobiFone',
