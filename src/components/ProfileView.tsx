@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import {
   UserRound,
@@ -363,6 +362,7 @@ export default function ProfileView({
           </span>
 
           <ChevronRight className="h-5 w-5 shrink-0 text-gray-500" />
+        </a>
 <a
   href="https://t.me/amobilesim"
   target="_blank"
@@ -606,7 +606,14 @@ export default function ProfileView({
             </div>
           ))}
         </div>
+     
       </Modal>
+      
+      <FAQModal
+        open={faqOpen}
+        onClose={() => setFaqOpen(false)}
+        lang={lang}
+      />
     </section>
   );
 }
