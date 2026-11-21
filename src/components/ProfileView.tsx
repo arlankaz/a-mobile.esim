@@ -13,8 +13,12 @@ import {
   X,
   LockKeyhole,
   Info,
+  Send,
+  CircleHelp,
+
 } from 'lucide-react';
 import Modal from './Modal';
+import FAQModal from './FAQModal';
 import type { Language } from './translations';
 
 interface ProfileViewProps {
@@ -286,6 +290,7 @@ export default function ProfileView({
   lang,
 }: ProfileViewProps) {
   const [referralOpen, setReferralOpen] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
 
   const labels = copy[lang] ?? copy.ru;
   const telegramName = getTelegramDisplayName();
@@ -358,9 +363,50 @@ export default function ProfileView({
           </span>
 
           <ChevronRight className="h-5 w-5 shrink-0 text-gray-500" />
-        </a>
-      </div>
+<a
+  href="https://t.me/amobilesim"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex w-full min-h-[54px] items-center justify-between px-4 py-3 text-left transition-colors hover:bg-gray-800/80"
+>
+  <span className="flex items-center gap-3">
+    <Send className="h-5 w-5 shrink-0 text-brand-400" />
+    <span className="text-white">
+      {({
+        ru: 'Наш канал',
+        en: 'Our channel',
+        kk: 'Біздің арна',
+        uz: 'Bizning kanal',
+        uk: 'Наш канал',
+        de: 'Unser Kanal',
+      } as Record<Language, string>)[lang]}
+    </span>
+  </span>
+  <ChevronRight className="h-5 w-5 shrink-0 text-gray-500" />
+</a>
 
+<button
+  type="button"
+  onClick={() => setFaqOpen(true)}
+  className="flex w-full min-h-[54px] items-center justify-between px-4 py-3 text-left transition-colors hover:bg-gray-800/80"
+>
+  <span className="flex items-center gap-3">
+    <CircleHelp className="h-5 w-5 shrink-0 text-brand-400" />
+    <span className="text-white">
+      {({
+        ru: 'Часто задаваемые вопросы',
+        en: 'Frequently asked questions',
+        kk: 'Жиі қойылатын сұрақтар',
+        uz: 'Ko‘p beriladigan savollar',
+        uk: 'Поширені запитання',
+        de: 'Häufig gestellte Fragen',
+      } as Record<Language, string>)[lang]}
+    </span>
+  </span>
+  <ChevronRight className="h-5 w-5 shrink-0 text-gray-500" />
+</button>
+      </div>
+      
       {/* Мои eSIM */}
       <div className="space-y-2 pt-1">
         <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-gray-300">
